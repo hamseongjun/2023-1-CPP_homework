@@ -77,7 +77,6 @@ int main(void) {
             map[row][col].points = EMPTY_POINTS;
         }
     }
-            
     // After the game pieces have been added to the map print out the map.
     print_game_play_map(map);
     printf("\nEXPLORE!\n");
@@ -103,7 +102,6 @@ int main(void) {
     }
     return 0;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// ADDITIONAL FUNCTIONS /////////////////////////////
