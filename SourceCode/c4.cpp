@@ -561,9 +561,9 @@ Program 4.24:Adding two polynomials
  5 bi = b.poly.begin();
  6 Polynomial c;
  7 while (ai && bi) { // current nodes are not null
- 8    if (ai->exp == bi->exp)) {
+ 8    if (ai->exp == bi->exp)) {  //둘의 지수가 같으면(동차면)
  9       int sum = ai->coef + bi->coef;
-10       if (sum) c.poly.InsertBack(temp.Set(sum, ai->exp));
+10       if (sum) c.poly.InsertBack(temp.Set(sum, ai->exp));  //InserBack : 가장 뒤에다 노드 하나 붙여주는 함수
 11       ai++; bi++;  // advance to next term
 12    }
 13    else if (ai->exp < bi->exp) {
@@ -575,11 +575,11 @@ Program 4.24:Adding two polynomials
 19       ai++; // next term of a
 20    }
 21 }
-22 while (ai) {// copy rest of a
+22 while (ai) {// copy rest of a  b다 끝내고 a항 떨거지들 붙여주기
 23    c.poly.InsertBack(temp.Set(ai->coef,ai->exp));
 24    ai++;
 25 }
-26 while (bi) {// copy rest of b
+26 while (bi) {// copy rest of b  얘도 마찬가지
 27    c.poly.InsertBack(temp.Set(bi->coef,bi->exp));
 28    bi++;
 29 }
@@ -602,18 +602,18 @@ Program 4.25:Adding two polynomials represented as circular...
  5                                          bi = b.poly.begin();
  6   Polynomial c; // assume constructor sets head->exp = -1
  7   while (1) {
- 8      if (ai->exp == bi->exp)) {
- 9         if (ai->exp == - 1) return c;
+ 8      if (ai->exp == bi->exp) {
+ 9         if (ai->exp == - 1) return c;  //모조노드가 지수값을 -1값을 가진다고 가정하면 모든 항을 다 더했다는 뜻. (둘 다 연산을 마치고 모조 head노드로 돌아왔다는 뜻이니까)
 10         int sum = ai->coef + bi->coef;
 11         if (sum) c.poly.InsertBack(temp.Set(sum, ai->exp));
 12         ai++; bi++;  // advance to next term
 13      }
-14      else if (ai->exp < bi->exp) {
+14      else if (ai->exp < bi->exp) { //4.24에서는 항이 남았을 때를 생각해서 while문을 한 번 더 돌렸는데, 이 코드들이 while(1)에 걸려서 다 처리해줌.
 15         c.poly.InsertBack(temp.Set(bi->coef, bi->exp));
 16         bi++; // next term of b
 17      }
-18      else {
-19         c.poly.InsertBack(temp.Set(ai->coef, ai->exp));
+18      else {  //얘도 마찬가지.
+19         c.poly.InsertBack(temp.Set(ai->coef, ai->exp));  
 20         ai++; // next term of a
 21      }
 22   }
