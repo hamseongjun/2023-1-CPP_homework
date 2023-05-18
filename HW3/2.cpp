@@ -106,10 +106,10 @@ typename DblList<T>::Iterator DblList<T>::end() {
 template <typename T>
 void DblList<T>::Insert(int i, const T& data)
 {
-    if (i < 0 || i > size) throw "invalid Index";
+    if (i < -1 || i > size) throw "invalid Index";
     
     DblListNode<T>* curr = first->right;   // 헤더 노드에서 시작
-    for (int j = 0; j < i-1; j++)     // i번째 노드까지 이동
+    for (int j = 0; j < i; j++)     // i번째 노드까지 이동
         curr = curr -> right;
     DblListNode<T>* newNode = new DblListNode<T>(data, curr, curr->right);    // 새로운 노드 생성
     curr->right->left = newNode;                                    // i+1번째 노드를 추가될 노드에 연결
@@ -212,7 +212,7 @@ int main(void)
 
     // 1. 1부터 9까지의 정수를 갖는 노드를 추가
     for (int i = 0; i < 9; i++) {
-        myList.Insert(i, Number(i+1));
+        myList.Insert(i-1, Number(i+1));
     }
 
     // 2. 체인의 각 노드들을 출력하여 1부터 9까지 순차적으로 출력되는지 확인
@@ -225,7 +225,7 @@ int main(void)
     cout << endl;
 
     // 3. 3과 4 노드 사이에 100 삽입
-    myList.Insert(3, Number(100));
+    myList.Insert(2, Number(100));
 
     // 4. 전체 노드의 값 출력
     it = myList.begin();
