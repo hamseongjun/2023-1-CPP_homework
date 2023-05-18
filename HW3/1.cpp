@@ -32,9 +32,9 @@ class DblList {
         }
         DblList operator--()
 
-        bool operator!=(const ChainIterator right) const
+        bool operator!=(const DblList right) const
             {return current != right.current;}
-        bool operator==(const ChainIterator right) const
+        bool operator==(const DblList right) const
             {return current == right.current;}
 
     private:
