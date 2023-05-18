@@ -65,6 +65,7 @@ class DblList {
 
     private:
         DblListNode<T> * first;     // 헤더노드를 가리킴
+        int size;
 };
 
 // 1) 생성자
@@ -73,6 +74,7 @@ DblList<T>::DblList() {
     first = new DblListNode<T>;     // 헤더 노드를 가진 공백 리스트 생성
     first->right = first;
     first->left = first;
+    size = 0;
 }
 
 // 2) 소멸자
@@ -104,24 +106,31 @@ typename DblList<T>::Iterator DblList<T>::end() {
 template <typename T>
 void DblList<T>::Insert(int i, const T& data)
 {
-    DblListNode<T>* curr = first;   // 헤더 노드에서 시작
-    for (int j = 0; j < i; j++)     // i번째 노드까지 이동
+    if (i < 0 || i > size) throw "invalid Index";
+    
+    DblListNode<T>* curr = first->right;   // 헤더 노드에서 시작
+    for (int j = 0; j < i-1; j++)     // i번째 노드까지 이동
         curr = curr -> right;
     DblListNode<T>* newNode = new DblListNode<T>(data, curr, curr->right);    // 새로운 노드 생성
     curr->right->left = newNode;                                    // i+1번째 노드를 추가될 노드에 연결
     curr->right = newNode;                                          // i번째 노드를 추가될 노드에 연결
+    size++;
 }
 
 // 6) i번째 노드를 삭제하는 함수
 template <typename T>
 void DblList<T>::Delete(int i)
 {
-    DblListNode<T>* curr = first;   // 헤더 노드에서 시작
+    if (i < 0 || i > size) throw "invalid Index";
+    if (size == 0) throw "Container is Empty";
+
+    DblListNode<T>* curr = first->right;   // 헤더 노드에서 시작
     for (int j = 0; j < i; j++)     // i번째 노드까지 이동
         curr = curr->right;   
     curr->right->left = curr->left;     // 다음 노드와 이전 노드 연결
     curr->left->right = curr->right;    // 이전 노드와 다음 노드 연결
     delete curr;                        // 현재 노드 삭제
+    size--;
 }
 
 // 7) 전진, 후진 반복자
@@ -189,6 +198,11 @@ class Number
         {
             return num;
         }
+        friend ostream& operator<<(ostream& os, const Number& number)
+        {
+            os << number.num;
+            return os;
+        }
 };
 
 // 메인 함수
@@ -205,18 +219,18 @@ int main(void)
     DblList<Number>::Iterator it = myList.begin();
     DblList<Number>::Iterator endIt = myList.end();
     while(it != endIt) {
-        it->ShowData();
+        cout << *it << " ";
         it++;
     }
     cout << endl;
 
     // 3. 3과 4 노드 사이에 100 삽입
-    myList.Insert(2, Number(100));
+    myList.Insert(3, Number(100));
 
     // 4. 전체 노드의 값 출력
     it = myList.begin();
     while(it != endIt) {
-        it->ShowData();
+        cout << *it << " ";
         it++;
     }
     cout << endl;
@@ -227,7 +241,7 @@ int main(void)
     // 6. 전체 노드의 값 출력
     it = myList.begin();
     while(it != endIt) {
-        it->ShowData();
+        cout << *it << " ";
         it++;
     }
     cout << endl;
