@@ -109,7 +109,7 @@ void DblList<T>::Insert(int i, const T& data)
     if (i < -1 || i > size) throw "invalid Index";
     
     DblListNode<T>* curr = first->right;   // 헤더 노드에서 시작
-    for (int j = 0; j < i; j++)     // i번째 노드까지 이동
+    for (int j = 0; j < i; j++)         // i번째 노드까지 이동
         curr = curr -> right;
     DblListNode<T>* newNode = new DblListNode<T>(data, curr, curr->right);    // 새로운 노드 생성
     curr->right->left = newNode;                                    // i+1번째 노드를 추가될 노드에 연결
@@ -129,7 +129,7 @@ void DblList<T>::Delete(int i)
         curr = curr->right;   
     curr->right->left = curr->left;     // 다음 노드와 이전 노드 연결
     curr->left->right = curr->right;    // 이전 노드와 다음 노드 연결
-    delete curr;                        // 현재 노드 삭제
+    delete curr;                        // i번째 노드 삭제
     size--;
 }
 
@@ -160,7 +160,7 @@ typename DblList<T>::Iterator DblList<T>::Iterator::operator--(int) {   // 후�
 // 8) accumulate 알고리즘
 template <typename T>
 T DblList<T>::accumulate(const Iterator& begin, const Iterator& end, const T initialValue) {
-    T sum = initialValue;
+    T sum = initialValue;                           //합의 초기값
     for (Iterator it = begin; it != end; it++) {
         sum = sum + *it;
     }
@@ -173,10 +173,10 @@ class Number
     private:
         int num;
     public:
-        Number() : num(0) { }
+        Number() : num(0) { }       // 추가) 인자가 없는 생성자의 멤버 변수 초기화
         Number(int n) : num(n) { }
         void ShowData() { cout<<num<<endl; }
-        Number operator+(const Number &ref)
+        Number operator+(const Number &ref)     // 추가) Number + Number 연산 지원
         {
             Number sum(num+ref.num);
             return sum;
@@ -189,16 +189,16 @@ class Number
         {
             return *this;
         }
-        Number& operator=(const Number& ref)
+        Number& operator=(const Number& ref)    // 추가) 임시객체로의 자동 형 변환
         {
             num = ref.num;
             return *this;
         }
-        operator int ()
+        operator int ()     // 추가) int형 변환 연산자 오버로딩
         {
             return num;
         }
-        friend ostream& operator<<(ostream& os, const Number& number)
+        friend ostream& operator<<(ostream& os, const Number& number)   // 추가) << 연산자 오버로딩
         {
             os << number.num;
             return os;
@@ -216,40 +216,49 @@ int main(void)
     }
 
     // 2. 체인의 각 노드들을 출력하여 1부터 9까지 순차적으로 출력되는지 확인
+    cout << "<< 1-2 result >>" << endl;
     DblList<Number>::Iterator it = myList.begin();
-    DblList<Number>::Iterator endIt = myList.end();
-    while(it != endIt) {
+    while(it != myList.end()) {
         cout << *it << " ";
         it++;
     }
-    cout << endl;
+    cout << endl << endl;
 
     // 3. 3과 4 노드 사이에 100 삽입
     myList.Insert(2, Number(100));
 
     // 4. 전체 노드의 값 출력
+    cout << "<< 3-4 result >>" << endl;
     it = myList.begin();
-    while(it != endIt) {
+    while(it != myList.end()) {
         cout << *it << " ";
         it++;
     }
-    cout << endl;
+    cout << endl << endl;
 
     // 5. 6을 삭제
     myList.Delete(6);
 
     // 6. 전체 노드의 값 출력
+    cout << "<< 5-6 result >>" << endl;
     it = myList.begin();
-    while(it != endIt) {
+    while(it != myList.end()) {
         cout << *it << " ";
         it++;
     }
-    cout << endl;
+    cout << endl << endl;
 
     // 7. accumulate 알고리즘으로 전체 노드의 총합 출력
     int sum = myList.accumulate(myList.begin(), myList.end(), 0);
-    cout << "Sum: " << sum << endl;
+    cout << "<< 7 result >>" << endl << "Sum: " << sum << endl << endl;
 
+    // 8. 제일 마지막 원소부터 맨 처음 원소까지 순서대로 출력
+    cout << "<< 8 result >>" << endl;
+    it = myList.end();
+    while(--it != myList.end()) {
+        cout << *it << " ";
+    }
+    cout << endl;
 
     return 0;
 }
