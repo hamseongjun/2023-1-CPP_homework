@@ -61,7 +61,7 @@ class DblList {
         void Insert(int i, const T& data);
         void Delete(int i);
 
-        T accumulate(const Iterator& begin, const Iterator& end, const T& init);
+        T accumulate(const Iterator& begin, const Iterator& end, const T initialValue);
 
     private:
         DblListNode<T> * first;     // 헤더노드를 가리킴
@@ -150,10 +150,10 @@ typename DblList<T>::Iterator DblList<T>::Iterator::operator--(int) {   // 후�
 
 // 8) accumulate 알고리즘
 template <typename T>
-T DblList<T>::accumulate(const Iterator& begin, const Iterator& end, const T& init) {
-    T sum = init;
-    for (Iterator iterator = begin; iterator != end; iterator++) {
-        sum += *iterator;
+T DblList<T>::accumulate(const Iterator& begin, const Iterator& end, const T initialValue) {
+    T sum = initialValue;
+    for (Iterator it = begin; it != end; it++) {
+        sum = sum + *it;
     }
     return sum;
 }
@@ -167,13 +167,27 @@ class Number
         Number() : num(0) { }
         Number(int n) : num(n) { }
         void ShowData() { cout<<num<<endl; }
-        Number * operator->()
+        Number operator+(const Number &ref)
+        {
+            Number sum(num+ref.num);
+            return sum;
+        }
+        Number* operator->()
         {
             return this;
         }
         Number& operator*()
         {
             return *this;
+        }
+        Number& operator=(const Number& ref)
+        {
+            num = ref.num;
+            return *this;
+        }
+        operator int ()
+        {
+            return num;
         }
 };
 
@@ -184,17 +198,44 @@ int main(void)
 
     // 1. 1부터 9까지의 정수를 갖는 노드를 추가
     for (int i = 0; i < 9; i++) {
-        myList.Insert(i, Number(i));
+        myList.Insert(i, Number(i+1));
     }
 
     // 2. 체인의 각 노드들을 출력하여 1부터 9까지 순차적으로 출력되는지 확인
     DblList<Number>::Iterator it = myList.begin();
     DblList<Number>::Iterator endIt = myList.end();
     while(it != endIt) {
-        cout << *it << " ";
+        it->ShowData();
         it++;
     }
     cout << endl;
+
+    // 3. 3과 4 노드 사이에 100 삽입
+    myList.Insert(2, Number(100));
+
+    // 4. 전체 노드의 값 출력
+    it = myList.begin();
+    while(it != endIt) {
+        it->ShowData();
+        it++;
+    }
+    cout << endl;
+
+    // 5. 6을 삭제
+    myList.Delete(6);
+
+    // 6. 전체 노드의 값 출력
+    it = myList.begin();
+    while(it != endIt) {
+        it->ShowData();
+        it++;
+    }
+    cout << endl;
+
+    // 7. accumulate 알고리즘으로 전체 노드의 총합 출력
+    int sum = myList.accumulate(myList.begin(), myList.end(), 0);
+    cout << "Sum: " << sum << endl;
+
 
     return 0;
 }
