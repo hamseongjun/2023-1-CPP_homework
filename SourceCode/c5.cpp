@@ -44,6 +44,7 @@ private:
   TreeNode<T> *leftChild;
   TreeNode<T> *rightChild;
 };
+
 template <class T>
 class Tree {
 public:
