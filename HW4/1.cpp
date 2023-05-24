@@ -62,7 +62,7 @@ void BST<K,E>::Insert(const pair<K,E> &thePair)
     if (thePair.first < pp->data.first) pp ->leftChild = p;
     else pp->rightChild = p;
 
-    // 추가된 노드의 붐 노드부터 상위로 올라가면서 leftSize 값 갱신
+    // 추가된 노드의 부모 노드부터 상위로 올라가면서 leftSize 값 갱신
     while (!stack.isEmpty()) {
       TreeNode<K,E>* parent = stack.pop();  
       parent->leftSize++;
