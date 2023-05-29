@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//Å¬·¡½º Bag ÅÛÇÃ¸´
+//í´ë˜ìŠ¤ Bag í…œí”Œë¦¿
 template <typename T>
 class Bag {
 public:
@@ -25,7 +25,7 @@ private:
     int top;
 };
 
-//»ı¼ºÀÚ
+//ìƒì„±ì
 template <typename T>
 Bag<T>::Bag(int bagCapacity): capacity(bagCapacity) {
     if (capacity < 1) throw "Capacity must be > 0";
@@ -33,25 +33,25 @@ Bag<T>::Bag(int bagCapacity): capacity(bagCapacity) {
     top = -1;
 }
 
-//¼Ò¸êÀÚ
+//ì†Œë©¸ì
 template <typename T>
 Bag<T>::~Bag(){
     delete[] array;
 }
 
-//»çÀÌÁî Size()
+//ì‚¬ì´ì¦ˆ Size()
 template <typename T>
 int Bag<T>::Size() const {
     return top + 1;
 }
 
-//ºñ¾ú´Ï? IsEmpty
+//ë¹„ì—ˆë‹ˆ? IsEmpty
 template <typename T>
 bool Bag<T>::IsEmpty() const {
     return Size() == 0;
 }
 
-//·£´ı ¿ø¼Ò ¸®ÅÏ Element
+//ëœë¤ ì›ì†Œ ë¦¬í„´ Element
 template <typename T>
 T& Bag<T>::Element() const {
     if (IsEmpty()) throw "Bag is empty";
@@ -60,7 +60,7 @@ T& Bag<T>::Element() const {
     return array[randomIndex];
 }
 
-//¹è¿­¿¡ ¿ø¼Ò ³Ö±â Push
+//ë°°ì—´ì— ì›ì†Œ ë„£ê¸° Push
 template <typename T>
 void Bag<T>::Push(const T& x) {
     if (capacity == top + 1)
@@ -75,8 +75,7 @@ void Bag<T>::Push(const T& x) {
     array[++top] = x;
 }
 
-//·£´ı ¿ø¼Ò »èÁ¦ Pop
-template <typename T>
+//ëœë¤ ì›ì†Œ ì‚­ì œ Poptemplate <typename T>
 void Bag<T>::Pop() {
     if (IsEmpty()) throw "Bag is empty, cannot delete";
     srand(time(NULL));

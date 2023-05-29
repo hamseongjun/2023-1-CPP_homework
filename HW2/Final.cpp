@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//????? Bag ???��?
+//클래스 Bag 템플릿
 template <typename T>
 class Bag {
 public:
@@ -25,7 +25,7 @@ private:
     int top;
 };
 
-//??????
+//생성자
 template <typename T>
 Bag<T>::Bag(int bagCapacity): capacity(bagCapacity) {
     if (capacity < 1) throw "Capacity must be > 0";
@@ -33,19 +33,19 @@ Bag<T>::Bag(int bagCapacity): capacity(bagCapacity) {
     top = -1;
 }
 
-//?????
+//소멸자
 template <typename T>
 Bag<T>::~Bag(){ delete[] array; }
 
-//?????? Size()
+//사이즈 Size()
 template <typename T>
 int Bag<T>::Size() const { return top + 1; }
 
-//?????? IsEmpty
+//비었니? IsEmpty
 template <typename T>
 bool Bag<T>::IsEmpty() const { return Size() == 0; }
 
-//???? ???? ???? Element
+//랜덤 원소 리턴 Element
 template <typename T>
 T& Bag<T>::Element() const {
     if (IsEmpty()) throw "Bag is empty";
@@ -54,7 +54,7 @@ T& Bag<T>::Element() const {
     return array[randomIndex];
 }
 
-//?��?? ???? ??? Push
+//배열에 원소 넣기 Push
 template <typename T>
 void Bag<T>::Push(const T& x) {
     if (capacity == top + 1)
@@ -69,7 +69,7 @@ void Bag<T>::Push(const T& x) {
     array[++top] = x;
 }
 
-//???? ???? ???? Pop
+//랜덤 원소 삭제 Pop
 template <typename T>
 void Bag<T>::Pop() {
     if (IsEmpty()) throw "Bag is empty, cannot delete";
@@ -79,7 +79,7 @@ void Bag<T>::Pop() {
     array[top--].~T();
 }
 
-//��???? ????? ????
+//캐릭터 클래스 정의
 class Character{
 protected:
     char * name = NULL;
@@ -107,7 +107,7 @@ public:
     }
 };
 
-//?????? ?????
+//워리어 클래스
 class Warrior : public Character{
     private:
         char * weapon = NULL;
@@ -120,24 +120,24 @@ class Warrior : public Character{
         }
 
         virtual void move() const {
-        cout << "?????????." << endl;
+        cout << "이동했습니다." << endl;
         }
 
         virtual void showInfo() const {
-            cout << "��???? ???: " << name << endl;
-            cout << "???? ???: " << weapon << endl;
-            cout << "????: " << level << endl;
-            cout << "??: " << str << endl;
-            cout << "??��: " << dex << endl;
-            cout << "????: " << intelligence << endl;
-            cout << "?????: " << op << endl;
-            cout << "????: " << dp << endl;
-            cout << "???: " << hp << endl;
-            cout << "?????: " << mp << endl;
+            cout << "캐릭터 이름: " << name << endl;
+            cout << "무기 이름: " << weapon << endl;
+            cout << "레벨: " << level << endl;
+            cout << "힘: " << str << endl;
+            cout << "민첩: " << dex << endl;
+            cout << "지능: " << intelligence << endl;
+            cout << "공격력: " << op << endl;
+            cout << "방어력: " << dp << endl;
+            cout << "체력: " << hp << endl;
+            cout << "정신력: " << mp << endl;
         }
 
         virtual void attack() const {
-            cout << weapon << "??? ??????." << endl;
+            cout << weapon << "으로 찔렀습니다." << endl;
         }
 
         virtual ~Warrior() {
@@ -145,7 +145,7 @@ class Warrior : public Character{
         }
 };
 
-//??? ?????
+//아처 클래스
 class Archer : public Character{
     private:
         char * weapon = NULL;
@@ -158,24 +158,24 @@ class Archer : public Character{
         }
 
         virtual void move() const {
-            cout << "?????????." << endl;
+            cout << "이동했습니다." << endl;
         }
 
         virtual void showInfo() const {
-            cout << "��???? ???: " << name << endl;
-            cout << "???? ???: " << weapon << endl;
-            cout << "????: " << level << endl;
-            cout << "??: " << str << endl;
-            cout << "??��: " << dex << endl;
-            cout << "????: " << intelligence << endl;
-            cout << "?????: " << op << endl;
-            cout << "????: " << dp << endl;
-            cout << "???: " << hp << endl;
-            cout << "?????: " << mp << endl;
+            cout << "캐릭터 이름: " << name << endl;
+            cout << "무기 이름: " << weapon << endl;
+            cout << "레벨: " << level << endl;
+            cout << "힘: " << str << endl;
+            cout << "민첩: " << dex << endl;
+            cout << "지능: " << intelligence << endl;
+            cout << "공격력: " << op << endl;
+            cout << "방어력: " << dp << endl;
+            cout << "체력: " << hp << endl;
+            cout << "정신력: " << mp << endl;
         }
 
         virtual void attack() const {
-            cout << weapon << "????? ???????." << endl;
+            cout << weapon << "을 쐈습니다." << endl;
         }
 
         virtual ~Archer() {
@@ -183,7 +183,7 @@ class Archer : public Character{
         }
 };
 
-//????? ?????
+//소서러 클래스
 class Sorcerer : public Character{
     private:
         char * weapon = NULL;
@@ -196,24 +196,24 @@ class Sorcerer : public Character{
         }
 
         virtual void move() const {
-        cout << "?????????." << endl;
+        cout << "이동했습니다." << endl;
     }
 
         virtual void showInfo() const {
-            cout << "��???? ???: " << name << endl;
-            cout << "???? ???: " << weapon << endl;
-            cout << "????: " << level << endl;
-            cout << "??: " << str << endl;
-            cout << "??��: " << dex << endl;
-            cout << "????: " << intelligence << endl;
-            cout << "?????: " << op << endl;
-            cout << "????: " << dp << endl;
-            cout << "???: " << hp << endl;
-            cout << "?????: " << mp << endl;
+            cout << "캐릭터 이름: " << name << endl;
+            cout << "무기 이름: " << weapon << endl;
+            cout << "레벨: " << level << endl;
+            cout << "힘: " << str << endl;
+            cout << "민첩: " << dex << endl;
+            cout << "지능: " << intelligence << endl;
+            cout << "공격력: " << op << endl;
+            cout << "방어력: " << dp << endl;
+            cout << "체력: " << hp << endl;
+            cout << "정신력: " << mp << endl;
         }
 
         virtual void attack() const {
-            cout << weapon << "?????? ????????." << endl;
+            cout << weapon << " 마법을 사용했습니다." << endl;
         }
 
         virtual ~Sorcerer() {
@@ -226,18 +226,18 @@ int main(void)
     Bag<Character*>* bag = new Bag<Character*>();
     Character * element = NULL;
 
-    cout << "**?? Bag ????**" << endl;
+    cout << "**빈 Bag 생성**" << endl;
     cout << "Size: " << bag->Size() << endl;
     cout << "IsEmpty: " << bag->IsEmpty() << endl << endl;
 
-    Warrior * leonard = new Warrior("????????", "?��");
-    Archer * weet = new Archer("???", "????");
-    Sorcerer * ocon = new Sorcerer("????", "???");
-    bag->Push(leonard);
-    bag->Push(weet);
-    bag->Push(ocon);
+    Warrior * leonhart = new Warrior("레온하트", "용사의 전투검");
+    Archer * silvia = new Archer("실비아", "신성한 화살");
+    Sorcerer * alice = new Sorcerer("엘리스", "파이어볼");
+    bag->Push(leonhart);
+    bag->Push(silvia);
+    bag->Push(alice);
 
-    cout << "**3?? Push() ????**" << endl;
+    cout << "**3번 Push() 이후**" << endl;
     cout << "Size: " << bag->Size() << endl;
     cout << "IsEmpty: " << bag->IsEmpty() << endl << endl;
     element = bag->Element();
@@ -245,20 +245,20 @@ int main(void)
     element->move();
     element->attack();
 
-    Warrior * walter = new Warrior("????", "????");
-    Warrior * wooganda = new Warrior("?��??", "??????");
-    Archer * legolas = new Archer("?????", "????");
-    Archer * lucas = new Archer("?????", "??");
-    Sorcerer * dexter = new Sorcerer("??????", "?????");
-    Sorcerer * myrr = new Sorcerer("???", "?????");
-    bag->Push(walter);
-    bag->Push(wooganda);
-    bag->Push(legolas);
-    bag->Push(lucas);
-    bag->Push(dexter);
-    bag->Push(myrr);
+    Warrior * morpheus = new Warrior("모르페우스", "어둠의 심판검");
+    Warrior * cassius = new Warrior("카시우스", "피로 물든 전투검");
+    Archer * ariel = new Archer("아리엘", "번개 화살");
+    Archer * daniel = new Archer("다니엘", "회오리 화살");
+    Sorcerer * iris = new Sorcerer("아이리스", "라이트닝 볼트");
+    Sorcerer * marie = new Sorcerer("마리", "아이스 애로우");
+    bag->Push(morpheus);
+    bag->Push(cassius);
+    bag->Push(ariel);
+    bag->Push(daniel);
+    bag->Push(iris);
+    bag->Push(marie);
 
-    cout << endl << "**6?? Push() ????**" << endl;
+    cout << endl << "**6번 Push() 이후**" << endl;
     cout << "Size: " << bag->Size() << endl;
     cout << "IsEmpty: " << bag->IsEmpty() << endl << endl;
     element = bag->Element();
@@ -269,7 +269,7 @@ int main(void)
     bag->Pop();
     bag->Pop();
     
-    cout << endl << "**2?? Pop() ????**" << endl;
+    cout << endl << "**2번 Pop() 이후**" << endl;
     cout << "Size: " << bag->Size() << endl;
     cout << "IsEmpty: " << bag->IsEmpty() << endl << endl;
     element = bag->Element();
